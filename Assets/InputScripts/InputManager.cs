@@ -8,17 +8,18 @@ public class InputManager : MonoBehaviour
     public static InputManager INSTANCE;
     public KeyCode leftKeyCode = KeyCode.A;
     public KeyCode rightKeyCode = KeyCode.D;
-    public KeyCode jumpKeyCode = KeyCode.Space;
-    public KeyCode attackDown = KeyCode.Mouse0;
-    public KeyCode attackUp = KeyCode.Mouse1;
+    public KeyCode jumpKeyCodeSpace = KeyCode.Space;
+    public KeyCode jumpKeyCodeW = KeyCode.W;
+    public KeyCode attackOne = KeyCode.Mouse0;
+    public KeyCode attackTwo = KeyCode.Mouse1;
     public KeyCode dashKeyCode = KeyCode.LeftShift;
 
     public delegate void IntDelegate(int dir);
     public IntDelegate moveDelegate;
+    public IntDelegate attackDelegate;
 
     public delegate void VoidDelegate();
     public VoidDelegate jumpDelegate;
-
     public VoidDelegate dashDelegate;
 
     private void Awake()
@@ -39,6 +40,7 @@ public class InputManager : MonoBehaviour
         Move();
         Jump();
         Dash();
+        AttackInput();
     }
 
     private void Move()
@@ -63,8 +65,10 @@ public class InputManager : MonoBehaviour
 
     private void Jump()
     {
-        bool jump = Input.GetKeyDown(jumpKeyCode);
-        if (jump)
+        bool jumpSpace = Input.GetKeyDown(jumpKeyCodeSpace);
+        bool jumpW = Input.GetKeyDown(jumpKeyCodeW);
+        
+        if (jumpSpace || jumpW)
         {
             jumpDelegate?.Invoke();
         }
@@ -76,6 +80,19 @@ public class InputManager : MonoBehaviour
         if (dash)
         {
             dashDelegate?.Invoke();
+        }
+    }
+    private void AttackInput()
+    {
+        bool attackOne = Input.GetKeyDown(this.attackOne);
+        bool attackTwo = Input.GetKeyDown(this.attackTwo);
+        if (attackOne)
+        {
+            attackDelegate?.Invoke(0);
+        }
+        else if (attackTwo)
+        {
+            attackDelegate?.Invoke(1);
         }
     }
 

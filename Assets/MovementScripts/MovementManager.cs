@@ -96,18 +96,13 @@ public class MovementManager : MonoBehaviour
 
     public void GroundCheck()
     {
-        RaycastHit2D hit = Physics2D.Raycast(transform.position, Vector2.down, 0.55f, config.layerMask);
+        RaycastHit2D hit = Physics2D.Raycast(transform.position, Vector2.down, 0.4f, config.layerMask);
         if (hit.collider != null)
         {
             if (movementState != MovementState.Jumping)
             {
                 movementState = MovementState.Grounded;
                 data.doubleJumpsLeft = config.availableDoubleJumps;
-
-
-
-
-
             }
         }
     }
