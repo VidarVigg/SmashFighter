@@ -45,3 +45,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   attackType: 1
   attackData: {fileID: 0}
+  weapon: {fileID: 0}
+  attacker: {fileID: 0}
+  go: {fileID: 0}

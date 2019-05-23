@@ -2,11 +2,20 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+[RequireComponent(typeof(Character))]
 public class MovementManager : MonoBehaviour
 {
     #region Variables
     [SerializeField] private MovementConfig config = new MovementConfig();
     [SerializeField] private MovementData data = new MovementData();
+
+    public delegate void DirectionDelegate(int direction);
+    public DirectionDelegate directionDelegate;
+
+    public MovementData Data
+    {
+        get { return data; }
+    }
 
     [System.Serializable]
     public enum MovementState
@@ -31,6 +40,7 @@ public class MovementManager : MonoBehaviour
     private void Awake()
     {
         rb = GetComponent<Rigidbody2D>();
+        Character character = GetComponent<Character>();
     }
 
     private void Start()
@@ -49,6 +59,8 @@ public class MovementManager : MonoBehaviour
 
         gameObject.transform.rotation = data.objectRotation;
 
+        
+
 
     }
 
@@ -62,10 +74,15 @@ public class MovementManager : MonoBehaviour
     public void Move(int dir)
     {
 
-        if (dir != 0)
+        if (dir != 0 && dir != data.attackDir)
         {
-            data.lastDir = dir;
+            data.attackDir = dir;
+            directionDelegate?.Invoke(dir);
         }
+        
+        
+        
+        /*
         if (dir > 0)
         {
             data.objectRotation = Quaternion.identity;
@@ -76,6 +93,7 @@ public class MovementManager : MonoBehaviour
             data.objectRotation.y = 180;
             gameObject.transform.rotation = data.objectRotation;
         }
+        */
 
         data.horizontalVelocity = dir * config.movementSpeed;
     }
@@ -96,6 +114,23 @@ public class MovementManager : MonoBehaviour
 
     public void GroundCheck()
     {
+
+        //Collider2D collider2D = GetComponent<Collider2D>();
+
+        //ContactFilter2D contactFilter = new ContactFilter2D();
+        //contactFilter.SetLayerMask(1 << 10);
+        //RaycastHit2D[] results = new RaycastHit2D[16];
+
+        //int count = collider2D.Cast(Vector2.down, contactFilter, results, 0.5f);
+
+        //for (int i = 0; i < count; i++)
+        //{
+        //    if (results[i])
+        //    {
+
+        //    }
+        //}
+
         RaycastHit2D hit = Physics2D.Raycast(transform.position, Vector2.down, 0.4f, config.layerMask);
         if (hit.collider != null)
         {
@@ -135,7 +170,7 @@ public class MovementManager : MonoBehaviour
     }
     private IEnumerator DashTimer()
     {
-        data.outerHorizontalVelocity = config.dashSpeed * data.lastDir;
+        data.outerHorizontalVelocity = config.dashSpeed * data.attackDir;
         yield return new WaitForSeconds(config.dashDuration);
         data.outerHorizontalVelocity = 0;
         dashTimer = null;

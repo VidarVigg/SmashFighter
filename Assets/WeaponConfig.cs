@@ -4,5 +4,5 @@ using UnityEngine;
 [System.Serializable]
 public class WeaponConfig 
 {
-
+    public BoxCollider2D hitCollider;
 }

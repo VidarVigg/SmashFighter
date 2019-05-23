@@ -88,11 +88,11 @@ public class InputManager : MonoBehaviour
         bool attackTwo = Input.GetKeyDown(this.attackTwo);
         if (attackOne)
         {
-            attackDelegate?.Invoke(0);
+            attackDelegate?.Invoke(1);
         }
         else if (attackTwo)
         {
-            attackDelegate?.Invoke(1);
+            attackDelegate?.Invoke(0);
         }
     }
 

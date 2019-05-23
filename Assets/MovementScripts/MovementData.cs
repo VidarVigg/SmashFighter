@@ -9,7 +9,7 @@ public class MovementData
     public float horizontalVelocity;
     public float outerVerticalVelocity;
     public float outerHorizontalVelocity;
-    public int lastDir;
+    public int attackDir;
     public int doubleJumpsLeft;
 
 

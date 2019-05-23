@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 1798702993442534473}
   - component: {fileID: 7548661701757663669}
   m_Layer: 0
-  m_Name: Uppercut
+  m_Name: UppercutAttack
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -45,3 +45,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   attackType: 0
   attackData: {fileID: 0}
+  weapon: {fileID: 0}
+  go: {fileID: 0}
+  data:
+    uppercutOriginRotation: {x: 0, y: 0, z: 0, w: 1}
+    uppercutEndDestination: {x: 0, y: 0, z: 0, w: 0}

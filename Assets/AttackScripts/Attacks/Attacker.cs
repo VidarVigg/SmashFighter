@@ -2,12 +2,20 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+[RequireComponent (typeof(Character))]
 public class Attacker : MonoBehaviour
 {
     [SerializeField] private AttackData[] attackDatas = null;
     [SerializeField] private Attack[] attacks = null;
+    [SerializeField] private AttackerData attackerData = new AttackerData();
+    public Character character;
+    private void Awake()
+    {
+       character = GetComponent<Character>();
+    }
     private void Start()
     {
+        attackerData.weapon = GetComponentInChildren<Weapon>().transform;
         InputManager.INSTANCE.attackDelegate += ExecuteAttack;
         Initialize();
     }
@@ -29,9 +37,10 @@ public class Attacker : MonoBehaviour
             {
                 continue;
             }
-            attacks[i] = Instantiate(attack, FindObjectOfType<Weapon>().transform);
-            // attacks[i].attackData = attackDatas[i];
-            attacks[i].SetData(attackDatas[i].GetInstance());
+            attacks[i] = Instantiate(attack, transform);
+            attacks[i].Initialize(attackDatas[i].GetInstance());
+            attacks[i].weapon = attackerData.weapon;
+            attacks[i].attacker = this;
         }
     }
     public void ExecuteAttack(int index)
