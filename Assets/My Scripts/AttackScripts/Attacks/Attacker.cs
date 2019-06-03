@@ -2,6 +2,8 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+
+// Instantiates and initializes attacks based on available attack datas.
 [RequireComponent (typeof(Character))]
 public class Attacker : MonoBehaviour
 {

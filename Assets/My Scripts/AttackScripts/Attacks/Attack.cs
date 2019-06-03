@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+    // Base Class for attacks
 public abstract class Attack : MonoBehaviour
 {
     public AttackType attackType;

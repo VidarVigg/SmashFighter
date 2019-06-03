@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+// Bash Attack up -> down
 public class Bash : Attack
 {
 

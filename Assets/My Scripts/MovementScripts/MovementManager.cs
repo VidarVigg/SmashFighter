@@ -57,10 +57,6 @@ public class MovementManager : MonoBehaviour
         inputManager.dashDelegate += Dash;
 
         gameObject.transform.rotation = data.objectRotation;
-
-        
-
-
     }
 
     private void Update()
@@ -78,22 +74,6 @@ public class MovementManager : MonoBehaviour
             data.attackDir = dir;
             directionDelegate?.Invoke(dir);
         }
-        
-        
-        
-        /*
-        if (dir > 0)
-        {
-            data.objectRotation = Quaternion.identity;
-            gameObject.transform.rotation = data.objectRotation;
-        }
-        else if (dir < 0)
-        {
-            data.objectRotation.y = 180;
-            gameObject.transform.rotation = data.objectRotation;
-        }
-        */
-
         data.horizontalVelocity = dir * config.movementSpeed;
     }
 
@@ -113,23 +93,6 @@ public class MovementManager : MonoBehaviour
 
     public void GroundCheck()
     {
-
-        //Collider2D collider2D = GetComponent<Collider2D>();
-
-        //ContactFilter2D contactFilter = new ContactFilter2D();
-        //contactFilter.SetLayerMask(1 << 10);
-        //RaycastHit2D[] results = new RaycastHit2D[16];
-
-        //int count = collider2D.Cast(Vector2.down, contactFilter, results, 0.5f);
-
-        //for (int i = 0; i < count; i++)
-        //{
-        //    if (results[i])
-        //    {
-
-        //    }
-        //}
-
         RaycastHit2D hit = Physics2D.Raycast(transform.position, Vector2.down, 0.4f, config.layerMask);
         if (hit.collider != null)
         {

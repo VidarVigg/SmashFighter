@@ -1,10 +1,9 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
+// Class that acts like a database of available attacks in resources.
 public class AttackManager : MonoBehaviour
-{// denna klass skall vara som en databas av attacker från resources. alltså de prefabs som finns i resources
-
+{
     public Attack[] attacks = new Attack[0];
     public static AttackManager INSTANCE;
     private void Awake()
