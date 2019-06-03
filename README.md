@@ -1,1 +1,2 @@
 # SmashFighter
+Ongoing individual project
