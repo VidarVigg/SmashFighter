@@ -21,25 +21,22 @@ public class Bash : Attack
 
         direction = attacker.character.Data.Direction;
         startAngle = (attackData as BashAttackData).angle * direction;
-        maxAngle = startAngle + (180 * direction);
+        maxAngle = startAngle + (50 * direction);
 
         if (executeRoutine == null)
         {
-
            executeRoutine = StartCoroutine(ExecuteRoutine());
         }
     }
 
     private IEnumerator ExecuteRoutine()
     {
-        weapon.rotation = Quaternion.Euler(0, 0, startAngle); // try to apply this to check against
+        weapon.rotation = Quaternion.Euler(0, 0, startAngle);
         if (direction > 0)
         {
-
             do
             {
                 weapon.Rotate(0, 0, -(attackData as BashAttackData).speed * direction);
-                Debug.Log(weapon.rotation.eulerAngles.z);
                 yield return null;
             } while ((weapon.rotation.eulerAngles.z <= startAngle) || (weapon.rotation.eulerAngles.z > maxAngle));
         }
@@ -48,7 +45,6 @@ public class Bash : Attack
             do
             {
                 weapon.Rotate(0, 0, -(attackData as BashAttackData).speed * direction);
-                Debug.Log(weapon.rotation.eulerAngles.z);
                 yield return null;
             } while (weapon.rotation.eulerAngles.z >= (360 + startAngle) || weapon.rotation.eulerAngles.z < (360 + maxAngle));
         }

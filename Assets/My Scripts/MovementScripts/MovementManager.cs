@@ -8,7 +8,6 @@ public class MovementManager : MonoBehaviour
     #region Variables
     [SerializeField] private MovementConfig config = new MovementConfig();
     [SerializeField] private MovementData data = new MovementData();
-
     public delegate void DirectionDelegate(int direction);
     public DirectionDelegate directionDelegate;
 

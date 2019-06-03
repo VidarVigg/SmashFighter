@@ -15,5 +15,5 @@ MonoBehaviour:
   attackType: 1
   force: 5
   damage: 8
-  angle: 30
+  angle: 75
   speed: 10
