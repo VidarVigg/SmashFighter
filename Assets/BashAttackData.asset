@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: BashAttackData
   m_EditorClassIdentifier: 
   attackType: 1
-  force: 5
+  force: 10
   damage: 8
   angle: 75
   speed: 10

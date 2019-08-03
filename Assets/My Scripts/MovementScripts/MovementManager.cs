@@ -11,6 +11,11 @@ public class MovementManager : MonoBehaviour
     public delegate void DirectionDelegate(int direction);
     public DirectionDelegate directionDelegate;
 
+    public delegate void AttackDirDelegate(int attackDir);
+    public AttackDirDelegate attackDirDelegate;
+
+    
+
     public MovementData Data
     {
         get { return data; }
@@ -20,14 +25,14 @@ public class MovementManager : MonoBehaviour
     public enum MovementState
     {
         Grounded,
-        Jumping, 
+        Jumping,
         Falling,
     }
     public MovementState movementState;
 
     public enum MovementDirection
     {
-        Left, 
+        Left,
         Right,
     }
     public MovementDirection movementDirection;
@@ -55,6 +60,7 @@ public class MovementManager : MonoBehaviour
         inputManager.moveDelegate += Move;
         inputManager.jumpDelegate += Jump;
         inputManager.dashDelegate += Dash;
+        inputManager.mouseAttackPositionDelegate += MousePositionCheck;
 
         gameObject.transform.rotation = data.objectRotation;
     }
@@ -104,6 +110,21 @@ public class MovementManager : MonoBehaviour
         }
     }
 
+    public void MousePositionCheck()
+    {
+        data.playerScreenPoint = Camera.main.WorldToScreenPoint(transform.position);
+        if (Input.mousePosition.x < data.playerScreenPoint.x)
+        {
+            attackDirDelegate.Invoke(-1);
+            //Debug.Log("Left");
+        }
+        else if (Input.mousePosition.x > data.playerScreenPoint.x)
+        {
+            attackDirDelegate.Invoke(1);
+            //Debug.Log("Right");
+        }
+    }
+
     public void Gravity()
     {
         if (movementState != MovementState.Grounded)
@@ -125,7 +146,7 @@ public class MovementManager : MonoBehaviour
 
     public void Dash()
     {
-        if(dashTimer == null)
+        if (dashTimer == null)
         {
             dashTimer = StartCoroutine(DashTimer());
         }

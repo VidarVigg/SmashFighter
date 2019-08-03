@@ -6,13 +6,14 @@ using UnityEngine;
 public class InputManager : MonoBehaviour
 {
     public static InputManager INSTANCE;
-    public KeyCode leftKeyCode = KeyCode.A;
-    public KeyCode rightKeyCode = KeyCode.D;
-    public KeyCode jumpKeyCodeSpace = KeyCode.Space;
-    public KeyCode jumpKeyCodeW = KeyCode.W;
-    public KeyCode attackOne = KeyCode.Mouse0;
-    public KeyCode attackTwo = KeyCode.Mouse1;
-    public KeyCode dashKeyCode = KeyCode.LeftShift;
+    private KeyCode leftKeyCode = KeyCode.A;
+    private KeyCode rightKeyCode = KeyCode.D;
+    private KeyCode jumpKeyCodeSpace = KeyCode.Space;
+    private KeyCode jumpKeyCodeW = KeyCode.W;
+    private KeyCode attackOne = KeyCode.Mouse0;
+    private KeyCode attackTwo = KeyCode.Mouse1;
+    private KeyCode dashKeyCode = KeyCode.LeftShift;
+
 
     public delegate void IntDelegate(int dir);
     public IntDelegate moveDelegate;
@@ -21,6 +22,7 @@ public class InputManager : MonoBehaviour
     public delegate void VoidDelegate();
     public VoidDelegate jumpDelegate;
     public VoidDelegate dashDelegate;
+    public VoidDelegate mouseAttackPositionDelegate;
 
     private void Awake()
     {
@@ -41,6 +43,7 @@ public class InputManager : MonoBehaviour
         Jump();
         Dash();
         AttackInput();
+
     }
 
     private void Move()
@@ -67,7 +70,7 @@ public class InputManager : MonoBehaviour
     {
         bool jumpSpace = Input.GetKeyDown(jumpKeyCodeSpace);
         bool jumpW = Input.GetKeyDown(jumpKeyCodeW);
-        
+
         if (jumpSpace || jumpW)
         {
             jumpDelegate?.Invoke();
@@ -86,15 +89,19 @@ public class InputManager : MonoBehaviour
     {
         bool attackOne = Input.GetKeyDown(this.attackOne);
         bool attackTwo = Input.GetKeyDown(this.attackTwo);
+        mouseAttackPositionDelegate.Invoke();
+
         if (attackOne)
         {
             attackDelegate?.Invoke(1);
+ 
         }
         else if (attackTwo)
         {
             attackDelegate?.Invoke(0);
         }
     }
+
 
 
 }

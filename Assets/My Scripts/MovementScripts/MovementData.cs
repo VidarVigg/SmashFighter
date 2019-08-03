@@ -11,6 +11,7 @@ public class MovementData
     public float outerHorizontalVelocity;
     public int attackDir;
     public int doubleJumpsLeft;
+    public Vector2 playerScreenPoint;
 
 
 

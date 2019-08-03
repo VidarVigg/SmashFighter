@@ -6,6 +6,13 @@ using UnityEngine;
 public class CharacterData
 {
     [SerializeField] private int direction;
+    [SerializeField] private int attackDirection;
+
+    public int AttackDirection
+    {
+        get { return attackDirection; }
+        set { attackDirection = value; }
+    }
 
     public int Direction
     {

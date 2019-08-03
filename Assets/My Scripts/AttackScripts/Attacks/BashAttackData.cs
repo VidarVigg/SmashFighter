@@ -16,7 +16,6 @@ public class BashAttackData : AttackData
         data.damage = damage;
         data.angle = angle;
         data.speed = speed;
-
         return data;
     }
 }

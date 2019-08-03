@@ -2,6 +2,7 @@
 [System.Serializable]
 public class AttackerData 
 {
-    public Transform weapon;
+    public Transform weaponTransform;
+    public Weapon weapon;
 
 }

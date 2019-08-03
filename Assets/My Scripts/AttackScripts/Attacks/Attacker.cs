@@ -17,7 +17,8 @@ public class Attacker : MonoBehaviour
     }
     private void Start()
     {
-        attackerData.weapon = GetComponentInChildren<Weapon>().transform;
+        attackerData.weapon = GetComponentInChildren<Weapon>();
+        attackerData.weaponTransform = attackerData.weapon.transform;
         InputManager.INSTANCE.attackDelegate += ExecuteAttack;
         Initialize();
     }
@@ -41,6 +42,7 @@ public class Attacker : MonoBehaviour
             }
             attacks[i] = Instantiate(attack, transform);
             attacks[i].Initialize(attackDatas[i].GetInstance());
+            attacks[i].weaponTransform = attackerData.weaponTransform;
             attacks[i].weapon = attackerData.weapon;
             attacks[i].attacker = this;
         }
@@ -48,5 +50,6 @@ public class Attacker : MonoBehaviour
     public void ExecuteAttack(int index)
     {
         attacks[index]?.Execute();
+        character.ActiveAttack = attacks[index].attackType;
     }
 }

@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-// Bash Attack up -> down
+
 public class Bash : Attack
 {
 
@@ -12,17 +12,15 @@ public class Bash : Attack
 
     private float maxAngle;
 
-    private Coroutine executeRoutine;
 
-    private TrailRenderer trailRenderer;
+
 
     public override void Execute()
     {
         Debug.Log("Bash Executed");
-
-        direction = attacker.character.Data.Direction;
+        direction = attacker.character.Data.AttackDirection;
         startAngle = (attackData as BashAttackData).angle * direction;
-        maxAngle = startAngle + (50 * direction);
+        maxAngle = startAngle + (1 * direction);
 
         if (executeRoutine == null)
         {
@@ -30,36 +28,36 @@ public class Bash : Attack
         }
     }
 
+
     private IEnumerator ExecuteRoutine()
     {
-        weapon.rotation = Quaternion.Euler(0, 0, startAngle);
+        weaponTransform.rotation = Quaternion.Euler(0, 0, startAngle);
+        weapon.ControllWeaponColliderAndVisuals(true);
         if (direction > 0)
         {
             do
             {
-                weapon.Rotate(0, 0, -(attackData as BashAttackData).speed * direction);
+                weaponTransform.Rotate(0, 0, -(attackData as BashAttackData).speed * direction);
                 yield return null;
-            } while ((weapon.rotation.eulerAngles.z <= startAngle) || (weapon.rotation.eulerAngles.z > maxAngle));
+            } while ((weaponTransform.rotation.eulerAngles.z <= startAngle) || (weaponTransform.rotation.eulerAngles.z > maxAngle));
         }
         else
         {
             do
             {
-                weapon.Rotate(0, 0, -(attackData as BashAttackData).speed * direction);
+                weaponTransform.Rotate(0, 0, -(attackData as BashAttackData).speed * direction);
                 yield return null;
-            } while (weapon.rotation.eulerAngles.z >= (360 + startAngle) || weapon.rotation.eulerAngles.z < (360 + maxAngle));
+            } while (weaponTransform.rotation.eulerAngles.z >= (360 + startAngle) || weaponTransform.rotation.eulerAngles.z < (360 + maxAngle));
         }
+        weapon.ControllWeaponColliderAndVisuals(false);
         executeRoutine = null;
 
     }
-    
 
     public override void Initialize(AttackData data)
-    {
-        trailRenderer = GetComponentInParent<TrailRenderer>();
-        
+    {   
         attackData = (BashAttackData)data;
-
-
     }
+
+
 }

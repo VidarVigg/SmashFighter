@@ -7,12 +7,12 @@ public abstract class Attack : MonoBehaviour
 {
     public AttackType attackType;
     public AttackData attackData;
-    public Transform weapon;
-
+    public Transform weaponTransform;
+    public Weapon weapon;
     public Attacker attacker;
-
     public abstract void Execute();
     public abstract void Initialize(AttackData data);
+    public Coroutine executeRoutine;
 } 
 public enum AttackType
 {
