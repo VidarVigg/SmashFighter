@@ -18,4 +18,5 @@ public enum AttackType
 {
     Uppercut, 
     Bash,
+    UltiExplosion,
 }

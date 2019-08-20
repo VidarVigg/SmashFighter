@@ -13,11 +13,13 @@ public class InputManager : MonoBehaviour
     private KeyCode attackOne = KeyCode.Mouse0;
     private KeyCode attackTwo = KeyCode.Mouse1;
     private KeyCode dashKeyCode = KeyCode.LeftShift;
+    private KeyCode ultiKey = KeyCode.C;
 
 
     public delegate void IntDelegate(int dir);
     public IntDelegate moveDelegate;
     public IntDelegate attackDelegate;
+    public IntDelegate ultiDelegate;
 
     public delegate void VoidDelegate();
     public VoidDelegate jumpDelegate;
@@ -89,6 +91,7 @@ public class InputManager : MonoBehaviour
     {
         bool attackOne = Input.GetKeyDown(this.attackOne);
         bool attackTwo = Input.GetKeyDown(this.attackTwo);
+        bool ultiActivate = Input.GetKeyDown(ultiKey);
         mouseAttackPositionDelegate.Invoke();
 
         if (attackOne)
@@ -100,7 +103,12 @@ public class InputManager : MonoBehaviour
         {
             attackDelegate?.Invoke(0);
         }
+        else if (ultiActivate)
+        {
+            attackDelegate?.Invoke(2);
+        }
     }
+
 
 
 

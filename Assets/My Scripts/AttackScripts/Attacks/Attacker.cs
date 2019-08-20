@@ -49,6 +49,7 @@ public class Attacker : MonoBehaviour
     }
     public void ExecuteAttack(int index)
     {
+        Debug.Log(index);
         attacks[index]?.Execute();
         character.ActiveAttack = attacks[index].attackType;
     }

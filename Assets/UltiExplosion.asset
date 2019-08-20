@@ -9,11 +9,8 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c3327be733db9d34c8fa259a31e31aca, type: 3}
-  m_Name: UppercutAttackData
+  m_Script: {fileID: 11500000, guid: dee8bb55532f1be4eb36f82878c0625a, type: 3}
+  m_Name: UltiExplosion
   m_EditorClassIdentifier: 
-  attackType: 0
-  force: 10
-  damage: 3
-  angle: 105
-  speed: 10
+  attackType: 2
+  force: 0

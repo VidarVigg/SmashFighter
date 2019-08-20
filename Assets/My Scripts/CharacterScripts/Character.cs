@@ -22,7 +22,7 @@ public class Character : MonoBehaviour
         {
             return;
         }
-
+        data.Attacker = FindObjectOfType<Attacker>();
         movementManager.directionDelegate += Rotation;
         movementManager.attackDirDelegate += AttackDirection;
     }

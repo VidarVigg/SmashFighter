@@ -14,8 +14,6 @@ public class MovementManager : MonoBehaviour
     public delegate void AttackDirDelegate(int attackDir);
     public AttackDirDelegate attackDirDelegate;
 
-    
-
     public MovementData Data
     {
         get { return data; }

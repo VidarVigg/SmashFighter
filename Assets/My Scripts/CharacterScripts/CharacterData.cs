@@ -7,6 +7,13 @@ public class CharacterData
 {
     [SerializeField] private int direction;
     [SerializeField] private int attackDirection;
+    [SerializeField] private Attacker attacker;
+
+    public Attacker Attacker
+    {
+        get { return attacker; }
+        set { attacker = value; }
+    }
 
     public int AttackDirection
     {

@@ -20,7 +20,7 @@ public class Bash : Attack
         Debug.Log("Bash Executed");
         direction = attacker.character.Data.AttackDirection;
         startAngle = (attackData as BashAttackData).angle * direction;
-        maxAngle = startAngle + (1 * direction);
+        maxAngle = startAngle + (70 * direction);
 
         if (executeRoutine == null)
         {

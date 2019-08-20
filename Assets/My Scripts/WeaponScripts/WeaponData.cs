@@ -12,4 +12,5 @@ public class WeaponData
     public RaycastHit2D hit;
     public SpriteRenderer weaponSprite;
     public BoxCollider2D weaponCollider;
+    public bool hasBeenTriggered;
 }

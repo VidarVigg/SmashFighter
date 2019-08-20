@@ -7,7 +7,7 @@ public class UppercutAttackData : AttackData
 
     [SerializeField] private float force;
     [SerializeField] private float damage;
-    [SerializeField] public float angle;
+    public float angle;
     public float speed;
 
     public override AttackData GetInstance()

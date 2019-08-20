@@ -22,20 +22,24 @@ public class Weapon : MonoBehaviour
         ControllWeaponColliderAndVisuals(false);
     }
 
+
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.tag == "Enemy")
-        {
-            data.direction = character.Data.Direction;
-            Enemy enemy = collision.GetComponent<Enemy>();
-            enemy.transform.rotation = Quaternion.identity;
-            data.launchCoordinate = controller.GetCoordinateByRaycast(data, transform, character.ActiveAttack);
-            Debug.Log(data.launchCoordinate);
-            enemy.Controller.CalculatedHeading(data.launchCoordinate, collision.transform.position, enemy.EnemyData);
-            enemy.EnemyData.state = EnemyData.EnemyState.hit;
-            StartCoroutine(enemy.EnemyIsHitRoutine());
 
-        }
+            if (collision.tag == "Enemy")
+            {
+
+                data.direction = character.Data.Direction;
+                Enemy enemy = collision.GetComponent<Enemy>();
+                enemy.transform.rotation = Quaternion.identity;
+                data.launchCoordinate = controller.GetCoordinateByRaycast(data, transform, character.ActiveAttack);
+                enemy.Controller.CalculateRagdollHeading(data.launchCoordinate, collision.transform.position, enemy.EnemyData);
+                enemy.EnemyData.state = EnemyData.EnemyState.hit;
+                StartCoroutine(enemy.EnemyIsHitRoutine());
+
+            }
+        
+
     }
 
     public void ControllWeaponColliderAndVisuals(bool onOrOff)

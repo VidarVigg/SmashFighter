@@ -15,7 +15,7 @@ public class Uppercut : Attack
 
         direction = attacker.character.Data.AttackDirection;
         startAngle = (attackData as UppercutAttackData).angle * direction;
-        maxAngle = startAngle - (1 * direction);
+        maxAngle = startAngle - (70 * direction);
 
         if (executeRoutine == null)
         {

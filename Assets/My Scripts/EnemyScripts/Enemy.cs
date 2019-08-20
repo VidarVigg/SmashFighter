@@ -1,7 +1,7 @@
 ﻿using System.Collections;
 using UnityEngine;
 
-public class Enemy : MonoBehaviour
+public class Enemy : Character
 {
     [SerializeField] private EnemyData enemyData = new EnemyData();
     [SerializeField] private EnemyController enemyController = new EnemyController();
@@ -29,13 +29,15 @@ public class Enemy : MonoBehaviour
     {
         if (enemyData.state == EnemyData.EnemyState.idle && gameObject != null && enemyData.HitLayer != 8)
         {
-            enemyData.Rb.velocity = (new Vector2(0, -600f)* Time.deltaTime);
+            //enemyData.Rb.velocity = (new Vector2(0, -800f)* Time.deltaTime);
+            //enemyController.TravelTowardsPlayer(transform.position, Data.Attacker.transform.position, enemyData.Rb);
         }
     }
     public IEnumerator EnemyIsHitRoutine()
     {
         Debug.Log(enemyData.state);
         enemyData.Rb.velocity = enemyData.Heading.normalized * 3000 * Time.deltaTime;
+        //Debug.Log(enemyData.Rb.velocity); // felet är att yledet blir negativt
         yield return new WaitForSeconds(0.3f);
         while (enemyData.state == EnemyData.EnemyState.hit)
         {
